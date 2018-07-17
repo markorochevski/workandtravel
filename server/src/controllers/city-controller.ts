@@ -117,20 +117,35 @@ class CityController {
         });
     }
 
+    // public getCityByName(route_name: string) {
+    //     return new Promise((resolve, reject) => {
+    //         return City.find({ route_name }, (err, data) => {
+    //             if (err) {
+    //                 return reject({ code: err.code, message: err.message });
+    //             }
+    //             else if (_.isEmpty(data)) {
+    //                 return reject({ code: 404, message: "City does not exist" });
+    //             }
+    //             else {
+    //                 return resolve(data);
+    //             }
+    //         })
+    //     })
+    // }
+
     public getCityByName(route_name: string) {
-        return new Promise((resolve, reject) => {
-            return City.find({ route_name }, (err, data) => {
-                if (err) {
-                    return reject({ code: err.code, message: err.message });
+        return City.find({ route_name })
+            .then((data:any) => {
+                if(_.isEmpty(data)){
+                    return Promise.reject({code: 404, message:'City does not exist'});
                 }
-                else if (_.isEmpty(data)) {
-                    return reject({ code: 404, message: "City does not exist" });
-                }
-                else {
-                    return resolve(data);
+                else{
+                    return data;
                 }
             })
-        })
+            .catch((err:any) => {
+                return Promise.reject(err);
+            });
     }
 
     public deleteCity(route_name: string) {

@@ -108,19 +108,33 @@ class CityController {
             });
         });
     }
+    // public getCityByName(route_name: string) {
+    //     return new Promise((resolve, reject) => {
+    //         return City.find({ route_name }, (err, data) => {
+    //             if (err) {
+    //                 return reject({ code: err.code, message: err.message });
+    //             }
+    //             else if (_.isEmpty(data)) {
+    //                 return reject({ code: 404, message: "City does not exist" });
+    //             }
+    //             else {
+    //                 return resolve(data);
+    //             }
+    //         })
+    //     })
+    // }
     getCityByName(route_name) {
-        return new Promise((resolve, reject) => {
-            return all_1.City.find({ route_name }, (err, data) => {
-                if (err) {
-                    return reject({ code: err.code, message: err.message });
-                }
-                else if (_.isEmpty(data)) {
-                    return reject({ code: 404, message: "City does not exist" });
-                }
-                else {
-                    return resolve(data);
-                }
-            });
+        return all_1.City.find({ route_name })
+            .then((data) => {
+            if (_.isEmpty(data)) {
+                return Promise.reject({ code: 404, message: 'City does not exist' });
+            }
+            else {
+                return data;
+            }
+        })
+            .catch((err) => {
+            return Promise.reject(err);
         });
     }
     deleteCity(route_name) {

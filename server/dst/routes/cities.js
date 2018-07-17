@@ -42,13 +42,13 @@ app.get('/get-cities', (req, res) => {
 });
 app.get('/get-city/:name', (req, res) => {
     console.log('Calling route /get-city');
-    return city_controller_1.default.getCityByName(req.params.name)
-        .then(result => {
-        return res.send(result);
-    })
-        .catch(err => {
-        return res.status(err.code).send(err.message);
-    });
+    return city_controller_1.default.getCityByName(req.params.name);
+    // .then(result => {
+    //     return res.send(result);
+    // })
+    // .catch(err => {
+    //     return res.status(err.code).send(err.message);
+    // })
 });
 app.delete('/delete/:name', (req, res) => {
     console.log('Calling route /delete');
@@ -69,8 +69,5 @@ app.delete('/delete-all', (req, res) => {
         .catch(err => {
         return res.status(err.code).send(err.message);
     });
-});
-app.get('/convert', (req, res) => {
-    return city_controller_1.default.convert();
 });
 //# sourceMappingURL=cities.js.map

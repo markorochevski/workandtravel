@@ -47,12 +47,12 @@ app.get('/get-cities', (req: any, res: any) => {
 app.get('/get-city/:name', (req: any, res: any) => {
     console.log('Calling route /get-city');
     return citycontroller.getCityByName(req.params.name)
-        .then(result => {
-            return res.send(result);
-        })
-        .catch(err => {
-            return res.status(err.code).send(err.message);
-        })
+        // .then(result => {
+        //     return res.send(result);
+        // })
+        // .catch(err => {
+        //     return res.status(err.code).send(err.message);
+        // })
 });
 
 app.delete('/delete/:name', (req: any, res: any) => {
